@@ -78,20 +78,29 @@ function App() {
 
       <Prism.Tabs
         sx={{ marginTop: theme.spacing.xl, marginBottom: theme.spacing.xl }}
+        defaultValue="npm"
       >
-        <Prism.Tab label="Npm" language="bash" icon={<ImNpm color="red" />}>
+        <Prism.TabsList>
+          <Prism.Tab value="npm" icon={<ImNpm color="red" />}>
+            Npm
+          </Prism.Tab>
+          <Prism.Tab value="yarn" icon={<FaYarn color="cyan" />}>
+            Yarn
+          </Prism.Tab>
+          <Prism.Tab value="pnpm" icon={<SiPnpm color="orange" />}>
+            Pnpm
+          </Prism.Tab>
+        </Prism.TabsList>
+
+        <Prism.Panel value="npm" language="bash">
           npm install manthemes
-        </Prism.Tab>
-        <Prism.Tab label="Yarn" language="bash" icon={<FaYarn color="cyan" />}>
+        </Prism.Panel>
+        <Prism.Panel value="yarn" language="bash">
           yarn add manthemes
-        </Prism.Tab>
-        <Prism.Tab
-          label="Pnpm"
-          language="bash"
-          icon={<SiPnpm color="orange" />}
-        >
+        </Prism.Panel>
+        <Prism.Panel value="pnpm" language="bash">
           pnpm add manthemes
-        </Prism.Tab>
+        </Prism.Panel>
       </Prism.Tabs>
 
       <Divider />

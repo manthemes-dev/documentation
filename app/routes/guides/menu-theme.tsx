@@ -95,13 +95,18 @@ export default MenuThemes;
       <Text sx={(theme) => ({ marginBottom: theme.spacing.lg })}>
         First, we need to have a component called <Code>menu-theme.js</Code>
       </Text>
-      <Prism.Tabs>
-        <Prism.Tab language="jsx" label="JSX">
+      <Prism.Tabs defaultValue="jsx">
+        <Prism.TabsList>
+          <Prism.Tab value="jsx">JSX</Prism.Tab>
+          <Prism.Tab value="tsx">TSX</Prism.Tab>
+        </Prism.TabsList>
+
+        <Prism.Panel language="jsx" value="jsx">
           {menu_themes_jsx_code}
-        </Prism.Tab>
-        <Prism.Tab language="tsx" label="TSX">
+        </Prism.Panel>
+        <Prism.Panel language="tsx" value="tsx">
           {menu_themes_tsx_code}
-        </Prism.Tab>
+        </Prism.Panel>
       </Prism.Tabs>
 
       <Divider className={classes.divider} />

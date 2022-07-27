@@ -75,15 +75,7 @@ const mockdata: LinksGroupProps[] = [
 
 export default function Appshell({ children, navLinks }: AppShellProps) {
   const theme = useMantineTheme();
-  const [mantheme, setMantheme] = useLocalStorage({
-    key: "mantine-theme",
-    defaultValue: { group: "daisyui", theme: "dark" },
-    getInitialValueInEffect: true,
-  });
   const location = useLocation();
-  const fetcher = useFetcher();
-
-  const manThemeFn = (value: any) => setMantheme(value || mantheme);
 
   const links = mockdata.map((item) => (
     <LinksGroup key={item.label} {...item} />
@@ -136,11 +128,12 @@ export default function Appshell({ children, navLinks }: AppShellProps) {
             <Group>
               <Menu
                 closeOnItemClick={false}
-                position="bottom"
-                placement="end"
+                position="bottom-end"
                 transition="skew-up"
-                styles={{ body: { height: "80vh", overflowY: "auto" } }}
-                control={
+                styles={{ dropdown: { height: "80vh", overflowY: "auto" } }}
+                withArrow
+              >
+                <Menu.Target>
                   <Button
                     color="primary"
                     variant="subtle"
@@ -148,122 +141,130 @@ export default function Appshell({ children, navLinks }: AppShellProps) {
                   >
                     Theme
                   </Button>
-                }
-                withArrow
-              >
-                <fetcher.Form method="post">
+                </Menu.Target>
+                <form method="post">
                   <input
                     type="hidden"
                     name="redirect"
                     value={location.pathname}
                   />
-                  <Menu.Label>DaisyUI</Menu.Label>
-                  <Menu.Item
-                    icon="🌞"
-                    name="theme"
-                    value="daisyui-light"
-                    type="submit"
-                  >
-                    Light
-                  </Menu.Item>
-                  <Menu.Item
-                    icon="🧁"
-                    name="theme"
-                    value="daisyui-cupcake"
-                    type="submit"
-                  >
-                    Cupcake
-                  </Menu.Item>
-                  <Menu.Item
-                    icon="🐝"
-                    name="theme"
-                    value="daisyui-bumblebee"
-                    type="submit"
-                  >
-                    Bumblebee
-                  </Menu.Item>
-                  <Menu.Item
-                    icon="🌛"
-                    name="theme"
-                    value="daisyui-dark"
-                    type="submit"
-                  >
-                    Dark
-                  </Menu.Item>
-                  <Menu.Item
-                    icon="🧛"
-                    name="theme"
-                    value="daisyui-dracula"
-                    type="submit"
-                  >
-                    Dracula
-                  </Menu.Item>
-                  <Menu.Item
-                    icon="🚗"
-                    name="theme"
-                    value="daisyui-retro"
-                    type="submit"
-                  >
-                    Retro
-                  </Menu.Item>
-                  <Menu.Item
-                    icon="🌊"
-                    name="theme"
-                    value="daisyui-synthwave"
-                    type="submit"
-                  >
-                    Synthwave
-                  </Menu.Item>
+                  <Menu.Dropdown>
+                    <Menu.Label>DaisyUI</Menu.Label>
+                    <Menu.Item
+                      icon="🌞"
+                      name="theme"
+                      value="daisyui-light"
+                      type="submit"
+                    >
+                      Light
+                    </Menu.Item>
+                    <Menu.Item
+                      icon="🧁"
+                      name="theme"
+                      value="daisyui-cupcake"
+                      type="submit"
+                    >
+                      Cupcake
+                    </Menu.Item>
+                    <Menu.Item
+                      icon="🐝"
+                      name="theme"
+                      value="daisyui-bumblebee"
+                      type="submit"
+                    >
+                      Bumblebee
+                    </Menu.Item>
+                    <Menu.Item
+                      icon="🌛"
+                      name="theme"
+                      value="daisyui-dark"
+                      type="submit"
+                    >
+                      Dark
+                    </Menu.Item>
+                    <Menu.Item
+                      icon="🧛"
+                      name="theme"
+                      value="daisyui-dracula"
+                      type="submit"
+                    >
+                      Dracula
+                    </Menu.Item>
+                    <Menu.Item
+                      icon="🚗"
+                      name="theme"
+                      value="daisyui-retro"
+                      type="submit"
+                    >
+                      Retro
+                    </Menu.Item>
+                    <Menu.Item
+                      icon="🌊"
+                      name="theme"
+                      value="daisyui-synthwave"
+                      type="submit"
+                    >
+                      Synthwave
+                    </Menu.Item>
+                    <Menu.Item
+                      icon="♒"
+                      name="theme"
+                      value="daisyui-aqua"
+                      type="submit"
+                    >
+                      Aqua
+                    </Menu.Item>
 
-                  <Divider />
+                    <Divider />
 
-                  <Menu.Label>Material</Menu.Label>
-                  <Menu.Item
-                    icon="🌞"
-                    name="theme"
-                    value="material-light"
-                    type="submit"
-                  >
-                    Light
-                  </Menu.Item>
-                  <Menu.Item
-                    icon="🌓"
-                    name="theme"
-                    value="material-dark"
-                    type="submit"
-                  >
-                    Dark
-                  </Menu.Item>
+                    <Menu.Label>Material</Menu.Label>
+                    <Menu.Item
+                      icon="🌞"
+                      name="theme"
+                      value="material-light"
+                      type="submit"
+                    >
+                      Light
+                    </Menu.Item>
+                    <Menu.Item
+                      icon="🌓"
+                      name="theme"
+                      value="material-dark"
+                      type="submit"
+                    >
+                      Dark
+                    </Menu.Item>
 
-                  <Divider />
+                    <Divider />
 
-                  <Menu.Label>Nightfox</Menu.Label>
-                  <Menu.Item
-                    icon="🦊"
-                    name="theme"
-                    type="submit"
-                    value="nightfox-nightfox"
-                  >
-                    Nightfox
-                  </Menu.Item>
+                    <Menu.Label>Nightfox</Menu.Label>
+                    <Menu.Item
+                      icon="🦊"
+                      name="theme"
+                      type="submit"
+                      value="nightfox-nightfox"
+                    >
+                      Nightfox
+                    </Menu.Item>
 
-                  <Divider />
+                    <Divider />
 
-                  <Menu.Label>Extras</Menu.Label>
-                  <Menu.Item
-                    icon="🌜"
-                    name="theme"
-                    value="moonlight-moonlight"
-                    type="submit"
-                  >
-                    Moonlight
-                  </Menu.Item>
-                </fetcher.Form>
+                    <Menu.Label>Extras</Menu.Label>
+                    <Menu.Item
+                      icon="🌜"
+                      name="theme"
+                      value="moonlight-moonlight"
+                      type="submit"
+                    >
+                      Moonlight
+                    </Menu.Item>
+                  </Menu.Dropdown>
+                </form>
               </Menu>
 
               <ActionIcon
                 component="a"
-                href="https://github.com/Johnsiras/manthemes"
+                href="https://github.com/manthemes-dev/manthemes"
                 target="_blank"
                 size="lg"
                 radius="md"

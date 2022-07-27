@@ -1,17 +1,17 @@
 import { useState } from "react";
 import {
-  Group,
   Box,
   Collapse,
-  ThemeIcon,
-  Text,
-  UnstyledButton,
   createStyles,
+  Group,
   MantineColor,
+  NavLink,
+  ThemeIcon,
+  UnstyledButton,
 } from "@mantine/core";
 
-import { AiOutlineArrowRight, AiOutlineArrowDown } from "react-icons/ai";
-import { Link } from "@remix-run/react";
+import { AiOutlineArrowDown, AiOutlineArrowRight } from "react-icons/ai";
+import { Link, useLocation } from "@remix-run/react";
 
 const useStyles = createStyles((theme) => ({
   control: {
@@ -34,10 +34,11 @@ const useStyles = createStyles((theme) => ({
   link: {
     fontWeight: 500,
     display: "block",
+    border: "12px",
     textDecoration: "none",
     padding: `${theme.spacing.xs}px ${theme.spacing.md}px`,
-    paddingLeft: 31,
-    marginLeft: 30,
+    paddingLeft: 50,
+    marginLeft: 15,
     fontSize: theme.fontSizes.sm,
     color:
       theme.colorScheme === "dark"
@@ -76,22 +77,24 @@ export function LinksGroup({
   initiallyOpened,
   links,
   link = "#",
-  color = "accent",
+  color = "cyan",
 }: LinksGroupProps) {
   const { classes, theme } = useStyles();
   const hasLinks = Array.isArray(links);
   const [opened, setOpened] = useState(initiallyOpened || false);
+  const location = useLocation();
   const ChevronIcon =
     theme.dir === "ltr" ? AiOutlineArrowRight : AiOutlineArrowDown;
   const items = (hasLinks ? links : []).map((link) => (
-    <Text<typeof Link>
-      component={Link}
-      className={classes.link}
-      to={link.link}
+    <NavLink
       key={link.label}
-    >
-      {link.label}
-    </Text>
+      component={Link}
+      label={link.label}
+      to={link.link}
+      active={location.pathname == link.link}
+      className={classes.link}
+      color={color}
+    />
   ));
 
   return (

@@ -1,4 +1,4 @@
-import { Stack, Text, Title } from "@mantine/core";
+import { Button, Stack, Text, Title } from "@mantine/core";
 
 export default function Index() {
   return (
@@ -19,6 +19,28 @@ export default function Index() {
             Mantine package made themes
           </Text>
         </Stack>
+        <Button size="lg">Click Me</Button>
+        <Button size="lg" color="cyan">
+          Click Me
+        </Button>
+        <Button size="lg" color="grape">
+          Click Me
+        </Button>
+        <Button size="lg" color="yellow">
+          Click Me
+        </Button>
+        <Button size="lg" color="blue">
+          Click Me
+        </Button>
+        <Button size="lg" color="green">
+          Click Me
+        </Button>
+        <Button size="lg" color="orange">
+          Click Me
+        </Button>
+        <Button size="lg" color="red">
+          Click Me
+        </Button>
       </div>
     </div>
   );

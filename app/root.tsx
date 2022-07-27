@@ -16,16 +16,14 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 
-import { getCache, MantineProvider } from "@mantine/core";
+import { MantineProvider, useMantineTheme } from "@mantine/core";
+import { StylesPlaceholder } from "@mantine/remix";
 import Appshell from "./components/Appshell";
 
-// import { Document } from "~/components/Document";
-
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { themeCookie } from "./themeCookie";
-import { ClientStyleContext } from "./context";
 
-import * as manthemes from "manthemes";
+import * as manthemes from "manthemes/dist";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -50,6 +48,7 @@ export const action: ActionFunction = async ({ request }) => {
   const url = formData.get("redirect") || "/";
 
   const theme = formData.get("theme") as string;
+  console.log(theme);
   const splitted = theme.split("-");
 
   return redirect(url as string, {
@@ -65,8 +64,8 @@ export const action: ActionFunction = async ({ request }) => {
 export const loader: LoaderFunction = async ({ request }) => {
   const theme_cookie = request.headers.get("Cookie");
   const cookie = (await themeCookie.parse(theme_cookie)) || {
-    group: "nightfox",
-    theme: "nightfox",
+    group: "daisyui",
+    theme: "aqua",
   };
 
   return json(cookie);
@@ -80,24 +79,12 @@ export function Document({ children }: { children: React.ReactNode }) {
   // @ts-ignore
   const manTheme = manthemes[group][theme];
 
-  const clientStyleData = useContext(ClientStyleContext);
-
-  useEffect(() => {
-    const cache = getCache({ key: "mantine" });
-    cache.sheet.container = document.head;
-    const tags = cache.sheet.tags;
-    cache.sheet.flush();
-    tags.forEach((tag) => {
-      (cache.sheet as any)._insertTag(tag);
-    });
-    clientStyleData?.reset();
-  }, []);
-
   return (
     <html lang="en">
       <head>
         <Meta />
         <Links />
+        <StylesPlaceholder />
       </head>
       <body>
         <MantineProvider theme={manTheme} withGlobalStyles withNormalizeCSS>
