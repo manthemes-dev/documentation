@@ -85,12 +85,12 @@ export default function Appshell({ children, navLinks }: AppShellProps) {
     <AppShell
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
-      fixed
       navbar={
         <Navbar height={700} width={{ sm: 300 }} p="md">
           <Navbar.Section grow>{links}</Navbar.Section>
         </Navbar>
       }
+      fixed
       header={
         <Header height={70} p="md">
           <div
